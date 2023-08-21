@@ -1,3 +1,5 @@
+%bcond_without check
+
 %global tarball_version %%(echo %{version} | tr '~' '.')
 
 Name:           loupe
@@ -76,11 +78,13 @@ sed -i -e '/Cargo.lock/d' meson.build
 %find_lang loupe --with-gnome
 
 
+%if %{with check}
 %check
 %meson_test
 
 appstream-util validate-relax --nonet $RPM_BUILD_ROOT%{_metainfodir}/org.gnome.Loupe.metainfo.xml
 desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/org.gnome.Loupe.desktop
+%endif
 
 
 %files -f loupe.lang
