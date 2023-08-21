@@ -29,7 +29,12 @@ BuildRequires:  rust-packaging
 BuildRequires:  /usr/bin/appstream-util
 BuildRequires:  /usr/bin/desktop-file-validate
 
+# For /usr/share/dbus-1/services directory
+Requires:       dbus
+# Image loaders used by loupe
 Requires:       glycin-loaders
+# For hicolor icon theme directories
+Requires:       hicolor-icon-theme
 
 %description
 An image viewer application written with GTK 4, Libadwaita and Rust.
