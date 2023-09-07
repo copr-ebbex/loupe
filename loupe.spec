@@ -1,5 +1,11 @@
 %bcond_without check
 
+%if 0%{?rhel}
+%global bundled_rust_deps 1
+%else
+%global bundled_rust_deps 0
+%endif
+
 %global tarball_version %%(echo %{version} | tr '~' '.')
 
 Name:           loupe
@@ -28,6 +34,12 @@ Source0:        https://download.gnome.org/sources/loupe/45/loupe-%{tarball_vers
 BuildRequires:  cargo-rpm-macros
 BuildRequires:  itstool
 BuildRequires:  meson
+%if 0%{?bundled_rust_deps}
+BuildRequires:  pkgconfig(gtk4)
+BuildRequires:  pkgconfig(gweather4)
+BuildRequires:  pkgconfig(lcms2)
+BuildRequires:  pkgconfig(libadwaita-1)
+%endif
 BuildRequires:  /usr/bin/appstream-util
 BuildRequires:  /usr/bin/desktop-file-validate
 
@@ -55,13 +67,17 @@ Features:
 %prep
 %autosetup -p1 -n loupe-%{tarball_version}
 
+%if ! 0%{?bundled_rust_deps}
 rm -rf vendor
 sed -i -e '/Cargo.lock/d' meson.build
 %cargo_prep
+%endif
 
 
+%if ! 0%{?bundled_rust_deps}
 %generate_buildrequires
 %cargo_generate_buildrequires
+%endif
 
 
 %build
