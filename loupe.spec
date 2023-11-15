@@ -9,7 +9,7 @@
 %global tarball_version %%(echo %{version} | tr '~' '.')
 
 Name:           loupe
-Version:        45.0
+Version:        45.1
 Release:        %autorelease
 Summary:        Image viewer
 
@@ -30,12 +30,6 @@ License:        (MIT OR Apache-2.0) AND Unicode-DFS-2016 AND (0BSD OR MIT OR Apa
 # LICENSE.dependencies contains a full license breakdown
 URL:            https://gitlab.gnome.org/GNOME/loupe
 Source0:        https://download.gnome.org/sources/loupe/45/loupe-%{tarball_version}.tar.xz
-
-# https://gitlab.gnome.org/GNOME/loupe/-/merge_requests/299
-Patch:          299.patch
-
-# https://gitlab.gnome.org/GNOME/loupe/-/merge_requests/302
-Patch:          302.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
