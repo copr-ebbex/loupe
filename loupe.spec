@@ -1,15 +1,12 @@
 %bcond_without check
 
-%if 0%{?rhel}
+# Switch this back once the packaged dependencies are updated.
 %global bundled_rust_deps 1
-%else
-%global bundled_rust_deps 0
-%endif
 
 %global tarball_version %%(echo %{version} | tr '~' '.')
 
 Name:           loupe
-Version:        45.3
+Version:        46.0
 Release:        %autorelease
 Summary:        Image viewer
 
@@ -29,7 +26,7 @@ Summary:        Image viewer
 License:        (MIT OR Apache-2.0) AND Unicode-DFS-2016 AND (0BSD OR MIT OR Apache-2.0) AND (Apache-2.0 OR MIT) AND (Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT) AND BSD-2-Clause AND GPL-3.0-or-later AND MIT AND (MIT OR Apache-2.0) AND (MIT OR Apache-2.0 OR Zlib) AND (MIT OR Zlib OR Apache-2.0) AND (MPL-2.0 OR LGPL-2.1-or-later) AND (Unlicense OR MIT) AND (Zlib OR Apache-2.0 OR MIT)
 # LICENSE.dependencies contains a full license breakdown
 URL:            https://gitlab.gnome.org/GNOME/loupe
-Source0:        https://download.gnome.org/sources/loupe/45/loupe-%{tarball_version}.tar.xz
+Source0:        https://download.gnome.org/sources/loupe/46/loupe-%{tarball_version}.tar.xz
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
@@ -46,6 +43,7 @@ BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(gweather4)
 BuildRequires:  pkgconfig(lcms2)
 BuildRequires:  pkgconfig(libadwaita-1)
+BuildRequires:  pkgconfig(libseccomp)
 %endif
 BuildRequires:  /usr/bin/appstream-util
 BuildRequires:  /usr/bin/desktop-file-validate
@@ -125,6 +123,7 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/org.gnome.Loupe.de
 %{_bindir}/loupe
 %{_datadir}/applications/org.gnome.Loupe.desktop
 %{_datadir}/dbus-1/services/org.gnome.Loupe.service
+%{_datadir}/glib-2.0/schemas/org.gnome.Loupe.gschema.xml
 %{_datadir}/icons/hicolor/scalable/apps/org.gnome.Loupe*.svg
 %{_datadir}/icons/hicolor/symbolic/apps/org.gnome.Loupe-symbolic.svg
 %{_metainfodir}/org.gnome.Loupe.metainfo.xml
