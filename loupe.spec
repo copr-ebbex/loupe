@@ -1,7 +1,10 @@
 %bcond_without check
 
-# Switch this back once the packaged dependencies are updated.
+%if 0%{?rhel}
 %global bundled_rust_deps 1
+%else
+%global bundled_rust_deps 0
+%endif
 
 %global tarball_version %%(echo %{version} | tr '~' '.')
 
@@ -83,7 +86,7 @@ sed -i -e '/Cargo.lock/d' meson.build
 
 %if ! 0%{?bundled_rust_deps}
 %generate_buildrequires
-%cargo_generate_buildrequires
+%cargo_generate_buildrequires -f x11
 %endif
 
 
