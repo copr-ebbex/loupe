@@ -1,10 +1,6 @@
 %bcond_without check
 
-%if 0%{?rhel}
-%global bundled_rust_deps 1
-%else
-%global bundled_rust_deps 0
-%endif
+%bcond bundled_rust_deps %{defined:rhel}
 
 %global tarball_version %%(echo %{version} | tr '~' '.')
 
@@ -47,7 +43,7 @@ BuildRequires:  cargo-rpm-macros
 %endif
 BuildRequires:  itstool
 BuildRequires:  meson
-%if 0%{?bundled_rust_deps}
+%if %{with bundled_rust_deps}
 BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(gweather4)
 BuildRequires:  pkgconfig(lcms2)
@@ -81,7 +77,7 @@ Features:
 %prep
 %autosetup -p1 -n loupe-%{tarball_version}
 
-%if 0%{?bundled_rust_deps}
+%if %{with bundled_rust_deps}
 %cargo_prep -v vendor
 %else
 rm -rf vendor
@@ -90,7 +86,7 @@ sed -i -e '/Cargo.lock/d' meson.build
 %endif
 
 
-%if ! 0%{?bundled_rust_deps}
+%if %{without bundled_rust_deps}
 %generate_buildrequires
 %cargo_generate_buildrequires -f x11
 %endif
@@ -102,7 +98,7 @@ sed -i -e '/Cargo.lock/d' meson.build
 
 %cargo_license_summary
 %{cargo_license} > LICENSE.dependencies
-%if 0%{?bundled_rust_deps}
+%if %{with bundled_rust_deps}
 %cargo_vendor_manifest
 %endif
 
@@ -125,7 +121,7 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/org.gnome.Loupe.de
 %files -f loupe.lang
 %license COPYING.md
 %license LICENSE.dependencies
-%if 0%{?bundled_rust_deps}
+%if %{with bundled_rust_deps}
 %license cargo-vendor.txt
 %endif
 %doc NEWS README.md
