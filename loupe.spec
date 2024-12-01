@@ -5,7 +5,7 @@
 %global tarball_version %%(echo %{version} | tr '~' '.')
 
 Name:           loupe
-Version:        47.1
+Version:        47.2
 Release:        %autorelease
 Summary:        Image viewer
 
@@ -28,10 +28,6 @@ License:        GPL-3.0-or-later AND BSD-2-Clause AND ISC AND MIT AND Unicode-DF
 # LICENSE.dependencies contains a full license breakdown
 URL:            https://gitlab.gnome.org/GNOME/loupe
 Source0:        https://download.gnome.org/sources/loupe/47/loupe-%{tarball_version}.tar.xz
-# https://gitlab.gnome.org/GNOME/loupe/-/merge_requests/465
-# https://gitlab.gnome.org/GNOME/loupe/-/issues/423
-# Fix crash on start with GTK 4.17
-Patch:          0001-application-Call-style_manager-from-startup.patch
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
 ExcludeArch:    %{ix86}
