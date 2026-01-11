@@ -5,7 +5,7 @@
 %global tarball_version %%(echo %{version} | tr '~' '.')
 
 Name:           loupe
-Version:        48.1
+Version:        48.2
 Release:        %autorelease
 Summary:        Image viewer
 
@@ -21,9 +21,9 @@ Summary:        Image viewer
 # ISC
 # MIT
 # MIT OR Apache-2.0
-# MIT OR Apache-2.0 OR Zlib
 # MIT OR Zlib OR Apache-2.0
 # MPL-2.0 OR LGPL-2.1-or-later
+# Unicode-3.0
 # Unlicense OR MIT
 # Zlib OR Apache-2.0 OR MIT
 License:        %{shrink:
@@ -35,7 +35,7 @@ License:        %{shrink:
     (Apache-2.0 OR MIT) AND
     (Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT) AND
     (BSD-2-Clause OR Apache-2.0 OR MIT) AND
-    (MIT OR Apache-2.0 OR Zlib) AND
+    (MIT OR Zlib OR Apache-2.0) AND
     (MPL-2.0 OR LGPL-2.1-or-later) AND
     (Unlicense OR MIT)
 }
