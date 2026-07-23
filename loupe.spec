@@ -51,6 +51,11 @@ Source1:        loupe-%{gnome_tarball_version}-vendor.tar.xz
 # to account for https://github.com/gufo-rs/gufo/commit/a8a4905
 Patch:          0001-Backport-support-for-gufo-0.5.0-beta.1.patch
 
+# Downstream-only: draw a theme-adaptive checkerboard behind images that
+# contain transparent pixels, instead of the adaptive solid backdrop.
+# Opt-in: gsettings set org.gnome.Loupe checkerboard-background true
+Patch:          loupe-transparency-checkerboard.patch
+
 %gnome_check_version
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
