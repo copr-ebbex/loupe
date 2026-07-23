@@ -47,6 +47,11 @@ Source0:        https://download.gnome.org/sources/loupe/%{gnome_major_version}/
 #   popd
 Source1:        loupe-%{gnome_tarball_version}-vendor.tar.xz
 
+# Downstream-only: draw a theme-adaptive checkerboard behind images that
+# contain transparent pixels, instead of the adaptive solid backdrop.
+# Opt-in: gsettings set org.gnome.Loupe checkerboard-background true
+Patch:          loupe-transparency-checkerboard.patch
+
 %gnome_check_version
 
 # https://fedoraproject.org/wiki/Changes/EncourageI686LeafRemoval
