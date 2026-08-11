@@ -1,0 +1,39 @@
+From 8c4916261cf3cdad965b2b7d422b2d900303c0bd Mon Sep 17 00:00:00 2001
+From: Fabio Valentini <decathorpe@gmail.com>
+Date: Tue, 11 Aug 2026 17:17:25 +0200
+Subject: [PATCH] Backport support for gufo 0.5.0-beta.1
+
+---
+ Cargo.toml      | 2 +-
+ src/metadata.rs | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Cargo.toml b/Cargo.toml
+index 06a4502..f04679c 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -36,7 +36,7 @@ gtk = { package = "gtk4", version = "0.11.0", features = [
+     "v4_14",
+     "xml_validation",
+ ] }
+-gufo = { version = "0.5.0-beta", features = ["chrono"] }
++gufo = { version = "0.5.0-beta.1", features = ["chrono"] }
+ gvdb-macros = "0.1.6"
+ indexmap = "2.0.0"
+ libc = "0.2.158"
+diff --git a/src/metadata.rs b/src/metadata.rs
+index 755ec5c..207941a 100644
+--- a/src/metadata.rs
++++ b/src/metadata.rs
+@@ -512,7 +512,7 @@ impl Metadata {
+             let transfer = match cicp.transfer_characteristics {
+                 cicp::TransferCharacteristics::Dci => gettext("DCI"),
+                 cicp::TransferCharacteristics::Pq => gettext("PQ"),
+-                cicp::TransferCharacteristics::Gamma24 => gettext("Gamma 2.4"),
++                cicp::TransferCharacteristics::Srgb => gettext("Gamma 2.4"),
+                 cicp::TransferCharacteristics::Unknown(n) => {
+                     gettext_f("Unknown ({})", [n.to_string()])
+                 }
+-- 
+2.55.0
+
