@@ -4,7 +4,7 @@
 
 Name:           loupe
 Version:        51.0
-Release:        %autorelease
+Release:        %autorelease -e 1
 Summary:        Image viewer
 
 # loupe: GPL-3.0-or-later
